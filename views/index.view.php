@@ -14,13 +14,44 @@
             <h3>Hello</h3>
 
             <form action="/test/" method="POST">
-                <label for="name" />
-                <input type="text" name="name">
+                <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" required>
+
+                <label for="job_position">Job Position</label>
+                <input type="text" id="job_position" name="job_position" required>
 
                 <input type="submit">
             </form>
 
-            <p><?= $name ?? 'Hello' ?></p>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Full Name</td>
+                        <td>Job Position</td>
+                        <td>Actions</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($query as $user) :?>
+                        <tr>
+                            <td><?= htmlspecialchars($user['full_name']) ?></td>
+                            <td><?= htmlspecialchars($user['job_position']) ?></td>
+                            <td>
+                                <a 
+                                    href="/test/edit?id=<?= $user['id'] ?>"
+                                    method="GET"
+                                >
+                                    Edit
+                                </a>
+                                <a href="?delete=<?= $user['id'] ?>" method="GET">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
         </div>
     </main>
 
